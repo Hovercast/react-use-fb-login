@@ -9,6 +9,7 @@ export interface FaceBookLoginState {
     isLoggedIn: boolean;
     currentUser?: User;
     loaded: boolean;
+    token?: any;
 }
 declare type FacebookFields = 'name' | 'email' | 'gender' | 'id';
 export interface FaceBookLoginProps {

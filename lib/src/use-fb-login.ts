@@ -12,6 +12,7 @@ export interface FaceBookLoginState {
   isLoggedIn: boolean;
   currentUser?: User;
   loaded: boolean;
+  token?: any;
 }
 
 type FacebookFields = 'name' | 'email' | 'gender' | 'id';
@@ -109,6 +110,10 @@ const loginCallback = (
   setState: (state: FaceBookLoginState) => void
 ): void => {
   if (response.authResponse) {
+    setState({
+      ...state,
+      token: response.authResponse,
+    });
     getUserInfo(props, state, setState);
   } else {
     if (props.onFailure) {
@@ -144,6 +149,7 @@ export const useFacebookLogin = (props: FaceBookLoginProps): [FaceBookLoginState
     isProcessing: false,
     isLoggedIn: false,
     loaded: false,
+    token: false,
   });
 
   const login = (): void => {
